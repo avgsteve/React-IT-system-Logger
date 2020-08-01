@@ -1,0 +1,38 @@
+{
+  "name": "react-it-system-logger",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "materialize-css": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "json-server": "^0.16.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "json-server": "json-server --watch db.json --port 5000",
+    "dev": "concurrently \"npm start\" \"npm run json-server\"",
+    "build": "react-script build",
+    "eject": "react-script eject",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
