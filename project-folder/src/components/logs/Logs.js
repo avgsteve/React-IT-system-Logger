@@ -4,7 +4,7 @@ import React,
 } from 'react';
 
 //Component
-import LogItem from './LogItem';
+import LogItem from './LogItem'; // wrong path name fixed
 import PreloaderProgressBar from '../layout/Preloader_progressBar';
 
 // GET logs data & RENDER

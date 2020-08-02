@@ -8,15 +8,17 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
 // ===== Components
 import SearchBar from './components/layout/SearchBar';
-import Logs from './components/logs/Logs';
-import AddBtn from './components/layout/AddBtn';
+import Logs from './components/logs/Logs';  // List system logs
+import AddBtn from './components/layout/AddBtn'; // round btn for activing Modal
+import AddLogModal from './components/logs/AddLogModal';
 
 
 function App() {
 
   useEffect(
     () => {
-      // let Materialize JavaScript to init automatically // ref: https://tinyurl.com/y5mvnhom
+      // let Materialize JavaScript to init automatically and globally
+      // ref: https://tinyurl.com/y5mvnhom
       M.AutoInit();
 
     }, [] // don't need to call it on every render
@@ -31,6 +33,7 @@ function App() {
 
       <div className="container">
         <AddBtn />
+        <AddLogModal />
         <Logs />
       </div>
 
