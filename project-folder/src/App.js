@@ -11,7 +11,7 @@ import SearchBar from './components/layout/SearchBar';
 import Logs from './components/logs/Logs';  // List system logs
 import AddBtn from './components/layout/AddBtn'; // round btn for activing Modal
 import AddLogModal from './components/logs/AddLogModal';
-
+import EditLogModal from './components/logs/EditLogModal';
 
 function App() {
 
@@ -34,6 +34,7 @@ function App() {
       <div className="container">
         <AddBtn />
         <AddLogModal />
+        <EditLogModal />
         <Logs />
       </div>
 
