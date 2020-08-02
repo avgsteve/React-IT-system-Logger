@@ -1,2 +1,11 @@
 
+
+
+// Section 11: Project 3 Start [ITLogger - Redux] - Componen…
+
 npx create-react-app .
+
+
+// for 78. LogItem & Preloader Components
+
+npm install moment react-moment
