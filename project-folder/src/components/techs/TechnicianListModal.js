@@ -3,6 +3,9 @@ import React,
   useState, useEffect
 } from 'react';
 
+import TechniciansItem from './TechnicianItem';
+
+
 // GET TECHNICIANS data & RENDER
 const TechniciansListModal = () => {
 
@@ -45,11 +48,10 @@ const TechniciansListModal = () => {
         <ul className="collection">
 
           { // if loading has finished & then iterate technicians data
-            !loading && technicians.map(technician =>
+            !loading && technicians.map(data =>
               ( // use <li> to show technicians' name
-                <li className='collection-item' key={technician.id}>
-                  {technician.firstName}
-                </li>
+                <TechniciansItem technicianData={data} key={data.id} />
+
               )
             )
           }

@@ -1,105 +1,26 @@
-import React,
-{
-    useState
-} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import M from 'materialize-css/dist/js/materialize.min.js';
-
-const AddTechnicianModal = () => {
-
-    //
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-
-
-    //function for submit action: <a href="#!" onClick={onSubmit}
-    const onSubmit = (submitEvent) => {
-
-        // submitEvent.preventDefault();
-
-        // Check if all the required message and technician data are entered
-        if (firstName === '' || lastName === '') {
-            // if not entered correctly, display error message
-            M.toast(
-                { html: 'Please make sure you have entered both first and last name' }
-            ); //ref: https://materializecss.com/toasts.html
-
-        } else {
-            console.log("\nfirstName: ", firstName, "\nlastName: ", lastName);
-
-            // after submitting the form, resetting form data
-            setFirstName("");
-            setLastName("");
-
-            // close the modal
-            let formModal = document.getElementById("add-log-modal");
-            let instance = M.Modal.getInstance(formModal);
-            instance.close();
-
-        }
-
-    };
-
-    // inline CSS for div element id='add-log-modal 
-    const modalStyle = {
-        width: '75%',
-        height: '75%'
-    };
-
-
+const TechnicianItem = ({ technicianData }) => {
 
     return (
-        <div id='add-technician-modal' className="modal" style={modalStyle} >
-            {/* // The prop id='add-log-modal' must match the element in AddBtn.js:    <a href="#add-log-modal"   */}
+        <li className="collection-item">
 
-
-            {/* === Main content in Modal === */}
-
-            <div className="modal-content">
-                <h4>New Technician</h4>
-
-
-                {/* --- first ROW: Input First Name --- */}
-                <div className="row">
-                    <div className="input-field">
-                        <input type="text" name='firstName' value={firstName}
-                            onChange={event => setFirstName(event.target.value)}
-                        // Use onChange to dynamically get input value and save it in state setter : setMessage
-                        />
-
-                        <label htmlFor="firstName" className='active'>
-                            First Name </label>
-                    </div>
-                </div>
-
-                {/* --- Second ROW: Input Last Name --- */}
-                <div className="row">
-                    <div className="input-field">
-                        <input type="text" name='lastName' value={lastName}
-                            onChange={event => setLastName(event.target.value)}
-                        // Use onChange to dynamically get input value and save it in state setter : setMessage
-                        />
-
-                        <label htmlFor="lastName" className='active'>
-                            Last Name </label>
-                    </div>
-                </div>
-
-
-
-            </div> {/* end of <  di v className="modal-content"> */}
-
-            <div className="modal-footer">
-                <a href="#!" onClick={onSubmit} className="modal-close waves-effect waves-blue blue btn"> Enter </a>
+            {/* Display technicians data */}
+            <div>
+                {technicianData.firstName} {technicianData.lastName}
+                <a href="#!" className="secondary-content">
+                    <i className="material-icons grey-text">delete</i>
+                </a>
             </div>
 
-            {/* end of outermost div */}
-        </div>
-
-    ); // end of return block
+        </li>
+    );
 
 };
 
+TechnicianItem.propTypes = {
+    technicianData: PropTypes.object.isRequired,
+};
 
-
-export default AddTechnicianModal;
+export default TechnicianItem;
