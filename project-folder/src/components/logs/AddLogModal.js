@@ -22,7 +22,7 @@ const AddLogModal = () => {
     if (message === '' || technician === '') {
       // if not entered correctly, display error message
       M.toast(
-        { html: 'Please you have entered both message and technician' }
+        { html: 'Please make sure you have entered both message and technician' }
       ); //ref: https://materializecss.com/toasts.html
 
     } else {

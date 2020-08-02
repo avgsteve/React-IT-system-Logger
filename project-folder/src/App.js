@@ -12,6 +12,8 @@ import Logs from './components/logs/Logs';  // List system logs
 import AddBtn from './components/layout/AddBtn'; // round btn for activing Modal
 import AddLogModal from './components/logs/AddLogModal';
 import EditLogModal from './components/logs/EditLogModal';
+import AddTechnicianModal from './components/techs/AddTechnicianModal';
+import TechniciansListModal from './components/techs/TechnicianListModal';
 
 function App() {
 
@@ -34,6 +36,10 @@ function App() {
       <div className="container">
         <AddBtn />
         <AddLogModal />
+        <AddTechnicianModal />
+        <TechniciansListModal />
+
+
         <EditLogModal />
         <Logs />
       </div>
