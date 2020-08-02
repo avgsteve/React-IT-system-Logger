@@ -22,7 +22,7 @@ const logItem = (
   const style_log_title = {
     'fontSize': '1.4rem',
     // 'marginTop': '25x', // can't apply
-    'line-height': '2.2rem',
+    'lineHeight': '2.5rem',
   };
 
 

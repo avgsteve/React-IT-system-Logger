@@ -5,7 +5,7 @@ import React,
 
 //Component
 import LogItem from './LogItem';
-import Preloader_progressBar from '../layout/Preloader_progressBar';
+import PreloaderProgressBar from '../layout/Preloader_progressBar';
 
 // GET logs data & RENDER
 const Logs = () => {
@@ -36,17 +36,18 @@ const Logs = () => {
       getLogsfromAPI(); // 
     }, []);
 
+
   // ==== MAIN FUNCTIONALITY ==== //
 
   // Condition: Is data still being loaded?
   if (loading) {
     return (
       // <h4>Loading...</h4> // changed to below
-      <Preloader_progressBar /> // showing loading icon
+      <PreloaderProgressBar /> // showing loading icon
     );
   }
 
-
+  // 
   const style_collection_header = {
     margin: '-10px 0px 5px 0px',
     padding: '0px 0px 5px 0px'
