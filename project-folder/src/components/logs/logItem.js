@@ -14,20 +14,36 @@ const logItem = (
   // ref for modal and trigger in <a> inside <li>:
   // https://materializecss.com/modals.html#!
 
+
+  const style_log_container = {
+    'padding': '10x 0px 10px 0px',
+  };
+
+  const style_log_title = {
+    'fontSize': '1.4rem',
+    // 'marginTop': '25x', // can't apply
+    'line-height': '2.2rem',
+  };
+
+
   return (
 
-    <li className="collection-item">
+    <li className="collection-item" style={style_log_container}>
 
       <div>
 
-        {/* === use materialize model: === */}
+        {/* === First line of log: Title === */}
 
-        <a href="#edit-log-modal"
+        <a href="#edit-log-modal" style={style_log_title}
           className={` modal-trigger           
-          ${ prop_log.attention ? 'red-text' : 'blue-text'} `}>
+          ${ prop_log.attention ? 'red-text' : 'blue-text'} `}
+
+        >
 
           {prop_log.message} </a>
 
+
+        {/* === Second line of log: Log Id, technician and log date & time === */}
         <br />
 
         {/* in-inline text for Log DETAILS composited of span tags */}
@@ -61,7 +77,7 @@ const logItem = (
 
       </div>
 
-    </li>
+    </li >
 
 
   );
