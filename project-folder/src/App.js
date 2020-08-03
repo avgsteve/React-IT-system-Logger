@@ -14,6 +14,9 @@ import AddLogModal from './components/logs/AddLogModal';
 import EditLogModal from './components/logs/EditLogModal';
 import AddTechnicianModal from './components/techs/AddTechnicianModal';
 import TechniciansListModal from './components/techs/TechnicianListModal';
+// ===== Redux
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
 
@@ -28,24 +31,26 @@ function App() {
 
 
   return (
+    <Provider store={store}>
 
-    <Fragment>
+      <Fragment>
 
-      <SearchBar />
+        <SearchBar />
 
-      <div className="container">
-        <AddBtn />
-        <AddLogModal />
-        <AddTechnicianModal />
-        <TechniciansListModal />
+        <div className="container">
+          <AddBtn />
+          <AddLogModal />
+          <AddTechnicianModal />
+          <TechniciansListModal />
 
 
-        <EditLogModal />
-        <Logs />
-      </div>
+          <EditLogModal />
+          <Logs />
+        </div>
 
-    </Fragment>
+      </Fragment>
 
+    </Provider>
   );
 
 };

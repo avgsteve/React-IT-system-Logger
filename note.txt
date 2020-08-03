@@ -9,3 +9,12 @@ npx create-react-app .
 // for 78. LogItem & Preloader Components
 
 npm install moment react-moment
+
+
+
+// 81. Redux Store & Provider Setup
+
+npm i  redux react-redux redux-thunk redux-devtools-extension
+
+redux instruction:
+https://github.com/zalmoxisus/redux-devtools-extension#usage
