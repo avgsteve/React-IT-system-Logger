@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
 import logReducer from './logReducer';
+import technicianReducer from './technicianReducer';
 
 // === This file combines all other reducers with combineReducers nmethod from package 'redux' ====
 
 export default combineReducers({
-    data_from_combined_log_reducers: logReducer,  // contains all  action types for log operation and data (as global state to be rendered by <App /> and its component <Provider />)
+    combined_log_reducers: logReducer,  // contains all  action types for log operation and data (as global state to be rendered by <App /> and its component <Provider />)
+
+    combined_technician_reducers: technicianReducer,  // contains all  action types for log operation and data (as global state to be rendered by <App /> and its component <Provider />)
 
 
     // Can pass other reducers to be combined into one reducer file like this one

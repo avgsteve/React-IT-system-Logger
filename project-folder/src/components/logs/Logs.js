@@ -99,7 +99,7 @@ Logs.propTypes = {
 
 const mapStateToProps = state => (
   {
-    log: state.data_from_combined_log_reducers,
+    log: state.combined_log_reducers,
 
     // data_for_combined_log_reducers is the property name from Redux store which created with  combined Reducer (from reducers/index.js)
   }

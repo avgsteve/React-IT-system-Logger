@@ -165,7 +165,7 @@ EditLogModal.propTypes = {
 
 
 const mapStateToProps = state => ({
-  current_Log: state.data_from_combined_log_reducers.current_editing_log, // get the log data from store's "current_editing_log" and pass it in to EditeLogModal Component as Props
+  current_Log: state.combined_log_reducers.current_editing_log, // get the log data from store's "current_editing_log" and pass it in to EditeLogModal Component as Props
 });
 
 

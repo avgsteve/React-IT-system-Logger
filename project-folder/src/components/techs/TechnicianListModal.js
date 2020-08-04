@@ -3,11 +3,15 @@ import React,
   useState, useEffect
 } from 'react';
 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { actionGetTechnicians } from '../../actions/technicianAction';
+
 import TechniciansItem from './TechnicianItem';
 
 
 // GET TECHNICIANS data & RENDER
-const TechniciansListModal = () => {
+const TechniciansListModal = ({ actionGetTechnicians }) => {
 
   // State containers for data for rendering component
   const [technicians, setTechnicians] = useState([]);
@@ -64,4 +68,9 @@ const TechniciansListModal = () => {
   );
 };
 
-export default TechniciansListModal;
+
+const mapStateToProps = state => ({
+  technician: state.combined_technician_reducers,
+});
+
+export default connect(mapStateToProps, { actionGetTechnicians })(TechniciansListModal);
