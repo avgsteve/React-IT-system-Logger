@@ -98,5 +98,4 @@ const AddTechnicianModal = () => {
 };
 
 
-
 export default AddTechnicianModal;

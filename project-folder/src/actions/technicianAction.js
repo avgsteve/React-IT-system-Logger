@@ -1,5 +1,12 @@
 import {
-  GET_TECHNICIANS, ADD_TECHNICIANS, DELETE_TECHNICIANS, SET_LOADING, TECHNICIAN_ERROR
+  GET_TECHNICIANS,
+  ADD_TECHNICIAN,
+  DELETE_TECHNICIAN,
+  SET_LOADING,
+  TECHNICIAN_ERROR,
+  CLEAR_CURRENT,
+  SET_CURRENT
+
 } from './types';
 
 
@@ -25,6 +32,9 @@ export const actionGetTechnicians = () => async dispatch => {
     const data = await res.json();
 
     // console.log('data from gettechnicians in technicianActions.js :', data);
+
+    // console.log('\n"technicians data"\n', data);
+
 
     dispatch({
       type: GET_TECHNICIANS,
@@ -64,7 +74,7 @@ export const actionAddNewtechnician = new_technician_data => async dispatch => {
     console.log(`\nsending dispatch to Reducer ...`);
 
     dispatch({
-      type: ADD_NEW_technician, // will send dispatch data to reducer
+      type: ADD_TECHNICIAN, // will send dispatch data to reducer
       payload: updated_technician_data_from_server, // and update the state with updated data from server
 
       // payload: {
@@ -78,7 +88,7 @@ export const actionAddNewtechnician = new_technician_data => async dispatch => {
     console.log('  \nThere\'s an error while adding new data with actionAddNewtechnician in technicianActions.js.  Error technician:\n  ', err);
 
     dispatch({
-      type: technicianS_ERROR,
+      type: TECHNICIAN_ERROR,
       payload: err.response.statusText
     });
 
@@ -87,12 +97,12 @@ export const actionAddNewtechnician = new_technician_data => async dispatch => {
 
 
 // Delete technician from server (and use argument id as payload)
-export const actionDeletetechnicianWithId = id => async dispatch => {
+export const actionDeleteTechnicianWithId = id => async dispatch => {
 
   try {
     setLoading();
 
-    console.log('\nAction of "actionDeletetechnicianWithId" has started!\n');
+    console.log('\nAction of "actionDeleteTechnicianWithId" has started!\n');
 
     await fetch(`http://localhost:5000/technicians/${id}`
       , { method: 'DELETE' }
@@ -100,7 +110,7 @@ export const actionDeletetechnicianWithId = id => async dispatch => {
 
 
     dispatch({
-      type: DELETE_technician,
+      type: DELETE_TECHNICIAN,
       payload: id
     });
 
@@ -109,7 +119,7 @@ export const actionDeletetechnicianWithId = id => async dispatch => {
   } catch (err) {
 
     dispatch({
-      type: technicianS_ERROR,
+      type: TECHNICIAN_ERROR,
       payload: err
     });
 
@@ -117,52 +127,52 @@ export const actionDeletetechnicianWithId = id => async dispatch => {
 };
 
 // Update technician on server
-export const actionUpdatetechnician = updatedtechnician => async dispatch => {
-  try {
-    setLoading();
+// export const actionUpdateTechnician = updatedtechnician => async dispatch => {
+//   try {
+//     setLoading();
 
-    const res = await fetch(`http://localhost:5000/technicians/${updatedtechnician.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(updatedtechnician),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+//     const res = await fetch(`http://localhost:5000/technicians/${updatedtechnician.id}`, {
+//       method: 'PUT',
+//       body: JSON.stringify(updatedtechnician),
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     });
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    dispatch({
-      type: UPDATE_technician,
-      payload: data
-    });
-  } catch (err) {
-    dispatch({
-      type: technicianS_ERROR,
-      payload: err.response.statusText
-    });
-  }
-};
+//     dispatch({
+//       type: UPDATE_TECHNICIAN,
+//       payload: data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: TECHNICIAN_ERROR,
+//       payload: err.response.statusText
+//     });
+//   }
+// };
 
 // Search server technicians
-export const actionSearchtechnicians = search_key_word => async dispatch => {
-  try {
-    setLoading();
+// export const actionSearchTechnicians = search_key_word => async dispatch => {
+//   try {
+//     setLoading();
 
-    const queryResult = await fetch(`http://localhost:5000/technicians?q=${search_key_word}`);
-    const queryData = await queryResult.json();
+//     const queryResult = await fetch(`http://localhost:5000/technicians?q=${search_key_word}`);
+//     const queryData = await queryResult.json();
 
-    dispatch({
-      type: SEARCH_technicianS,
-      payload: queryData
-    });
+//     dispatch({
+//       type: SEARCH_TECHNICIANS,
+//       payload: queryData
+//     });
 
-  } catch (err) {
-    dispatch({
-      type: technicianS_ERROR,
-      payload: err.response.statusText
-    });
-  }
-};
+//   } catch (err) {
+//     dispatch({
+//       type: TECHNICIAN_ERROR,
+//       payload: err.response.statusText
+//     });
+//   }
+// };
 
 // Use current technician and add a "current" property to the technician
 export const actionSetCurrent = technician_item_for_editing => {

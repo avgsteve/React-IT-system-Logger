@@ -30,14 +30,14 @@ const Logs = (
   useEffect(
     () => {
 
-      console.log('\n=== "useEffect" in Logs.js initiated ===\n\n');
+      // console.log('\n=== "useEffect" in Logs.js initiated ===\n\n');
 
       getLogs();
 
       // eslint-disable-next-line
     }, []);
 
-  console.log('\nThe props of "logs" & "loading" in Component "Log.js": \n', logs, loading);
+  // console.log('\nThe props of "logs" & "loading" in Component "Log.js": \n', logs, loading);
 
   // ==== MAIN FUNCTIONALITY ==== //
 

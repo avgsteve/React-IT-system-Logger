@@ -1,6 +1,7 @@
 import React,
 {
-  useState, useEffect
+  // useState, 
+  useEffect
 } from 'react';
 
 import { connect } from 'react-redux';
@@ -11,33 +12,30 @@ import TechniciansItem from './TechnicianItem';
 
 
 // GET TECHNICIANS data & RENDER
-const TechniciansListModal = ({ actionGetTechnicians }) => {
+const TechniciansListModal = ({ technicians_data: { technicians, loading }, actionGetTechnicians }) => {
 
-  // State containers for data for rendering component
-  const [technicians, setTechnicians] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // // get technicians data from API
+  // const getTechniciansFromAPI = async () => {
+  //   setLoading(true);
+  //   const res = await fetch('http://localhost:5000/technicians');
+  //   const data = await res.json();
 
+  //   setTechnicians(data);
 
-  // get technicians data from API
-  const getTechniciansFromAPI = async () => {
-    setLoading(true);
-    const res = await fetch('http://localhost:5000/technicians');
-    const data = await res.json();
+  //   // this is to show the loading progress bar
+  //   setTimeout(() => {
+  //     setLoading(false); // turn off the bar
+  //   }, 1000); // in 1 second
 
-    setTechnicians(data);
-
-    // this is to show the loading progress bar
-    setTimeout(() => {
-      setLoading(false); // turn off the bar
-    }, 1000); // in 1 second
-
-  };
+  // };
 
   // Use data of technicians while component is mounted
   useEffect(
     () => {
-      getTechniciansFromAPI(); // 
-    }, []);
+      actionGetTechnicians(); // 
+    }, [
+    actionGetTechnicians
+  ]);
 
 
   // ==== MAIN FUNCTIONALITY: listing all technicians ==== //
@@ -52,12 +50,14 @@ const TechniciansListModal = ({ actionGetTechnicians }) => {
         <ul className="collection">
 
           { // if loading has finished & then iterate technicians data
-            !loading && technicians.map(data =>
+
+            !loading && technicians !== null && technicians.map(data =>
               ( // use <li> to show technicians' name
                 <TechniciansItem technicianData={data} key={data.id} />
 
               )
             )
+
           }
 
         </ul>
@@ -68,9 +68,12 @@ const TechniciansListModal = ({ actionGetTechnicians }) => {
   );
 };
 
+TechniciansListModal.prototype = {
+  actionGetTechnicians: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
-  technician: state.combined_technician_reducers,
+  technicians_data: state.combined_technician_reducers,
 });
 
 export default connect(mapStateToProps, { actionGetTechnicians })(TechniciansListModal);

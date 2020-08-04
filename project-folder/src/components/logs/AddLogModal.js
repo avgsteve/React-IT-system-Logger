@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { actionAddNewLog } from '../../actions/logActions';
 
 import PropTypes from 'prop-types';
-
-
 import M from 'materialize-css/dist/js/materialize.min.js';
+
+import TechnicianSelectOptions from '../techs/AddTechnicianModal';
 
 
 
@@ -72,6 +72,7 @@ const AddLogModal = ({ actionAddNewLog }) => {
 
 
   return (
+
     <div id='add-log-modal' className="modal" style={modalStyle} >
       {/* // The prop id='add-log-modal' must match the element in AddBtn.js:    <a href="#add-log-modal"   */}
 
@@ -97,23 +98,17 @@ const AddLogModal = ({ actionAddNewLog }) => {
 
 
         {/* --- second ROW: Select technician ---  
-          */}        <div className="row">
+          */}
+        <div className="row">
           <div className="input-field">
 
-            <select
-              name="technician" className='browser-default'
+            <select name="technician" value={technician}
+              className='browser-default'
               // Use className='browser-default' to pre-select default technician if available
-              value={technician}
               onChange={e => setTechnician(e.target.value)}
             // Use onChange to dynamically get input value and save it in state setter : setMessage
-            >
-
-              <option value="" disabled> == Select technician == </option>
-              <option value="John Doe">John Doe</option>
-              <option value="Sam Smith">Sam Smith</option>
-              <option value="Steve Leng">Steve Leng</option>
-              <option value="Sara Wilson">Sara Wilson</option>
-
+            ><option value='' disabled> == Select technician == </option>
+              <TechnicianSelectOptions />
             </select>
 
           </div>

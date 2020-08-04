@@ -34,6 +34,13 @@
       "tech": "Sara Wilson",
       "date": "2020-08-04T10:18:31.711Z",
       "id": 6
+    },
+    {
+      "message": "test log abc",
+      "attention": true,
+      "tech": "Steve Leng",
+      "date": "2020-08-04T13:59:32.955Z",
+      "id": 7
     }
   ],
   "technicians": [
@@ -51,6 +58,11 @@
       "id": 3,
       "firstName": "Sara",
       "lastName": "Wilson"
+    },
+    {
+      "id": 4,
+      "firstName": "Steve",
+      "lastName": "Leng"
     }
   ]
 }
