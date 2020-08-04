@@ -5,7 +5,7 @@ import {
     ADD_NEW_LOG,
     DELETE_LOG,
     UPDATE_LOG,
-    // SEARCH_LOGS,
+    SEARCH_LOGS,
     SET_CURRENT,
     CLEAR_CURRENT
 } from '../actions/types';
@@ -90,6 +90,13 @@ export default (
                 ...state,
                 current_editing_log: null
             };
+
+        case SEARCH_LOGS:
+            return {
+                ...state,
+                logs: action.payload
+            };
+
 
 
         default:

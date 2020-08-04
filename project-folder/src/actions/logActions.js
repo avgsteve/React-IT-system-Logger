@@ -170,17 +170,18 @@ export const actionUpdateLog = updatedLog => async dispatch => {
 };
 
 // Search server logs
-export const actionSearchLogs = text => async dispatch => {
+export const actionSearchLogs = search_key_word => async dispatch => {
   try {
     setLoading();
 
-    const res = await fetch(`http://localhost:5000/logs?q=${text}`);
-    const data = await res.json();
+    const queryResult = await fetch(`http://localhost:5000/logs?q=${search_key_word}`);
+    const queryData = await queryResult.json();
 
     dispatch({
       type: SEARCH_LOGS,
-      payload: data
+      payload: queryData
     });
+
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
