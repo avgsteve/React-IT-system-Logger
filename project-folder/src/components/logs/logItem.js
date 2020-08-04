@@ -5,7 +5,10 @@ import Moment from 'react-moment'; // generate formatted time stamp
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 import { connect } from 'react-redux';
-import { actionDeleteLogWithId } from '../../actions/logActions';
+import {
+  actionDeleteLogWithId,
+  actionSetCurrent,
+} from '../../actions/logActions';
 
 
 // emmet rafcp
@@ -13,7 +16,9 @@ import { actionDeleteLogWithId } from '../../actions/logActions';
 // The component for displaying li element inside ul in Logs.js
 const logItem = (
   { prop_log, // prop for log data in <logItem /> in Logs.js
-    actionDeleteLogWithId }  // calls action and DELETE dispatch
+    actionDeleteLogWithId, // calls action and DELETE dispatch
+    actionSetCurrent, // click one log item and assign it's the value to store's property "current_editing_log" for pop-up window:  <div id='edit-log-modal'>
+  }
 ) => {
 
   // === CSS styles in JSX ===
@@ -50,7 +55,9 @@ const logItem = (
         <a href="#edit-log-modal" style={style_log_title}
           className={`modal-trigger           
           ${ prop_log.attention ? 'red-text' : 'blue-text'} `}
-        > {prop_log.message} </a>
+          onClick={() => actionSetCurrent(prop_log)} >
+
+          {prop_log.message} </a>
 
         {/* ref for "modal" and using class name "modal trigger" 
          in <a> inside <li>: https://materializecss.com/modals.html#! */}
@@ -104,6 +111,7 @@ const logItem = (
 logItem.propTypes = {
   prop_log: PropTypes.object.isRequired,
   actionDeleteLogWithId: PropTypes.func.isRequired,
+  actionSetCurrent: PropTypes.func.isRequired,
 };
 
 
@@ -114,7 +122,7 @@ logItem.propTypes = {
 
 export default connect(
   null, // use state inside Logs Component as "prop"
-  { actionDeleteLogWithId }// use action/dispatch inside Logs Component as "prop"
+  { actionDeleteLogWithId, actionSetCurrent }// use action/dispatch inside Logs Component as "prop"
 )(logItem); // connect this Logs Component with Redux store before export default
 
 

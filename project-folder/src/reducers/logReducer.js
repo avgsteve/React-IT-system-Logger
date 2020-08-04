@@ -4,11 +4,15 @@ import {
     LOGS_ERROR,
     ADD_NEW_LOG,
     DELETE_LOG,
+    UPDATE_LOG,
+    // SEARCH_LOGS,
+    SET_CURRENT,
+    CLEAR_CURRENT
 } from '../actions/types';
 
 const initialState = {
     logs: null,
-    currrent: null,
+    current_editing_log: null,
     loading: false,
     error: null,
     attention: false,
@@ -65,6 +69,26 @@ export default (
                     //filter and keep the logs have the id NOT eqaul to the action.id
                 ),
                 loading: false,
+            };
+
+        case UPDATE_LOG:
+            return {
+                ...state,
+                logs: state.logs.map(log => // find matched log and return the payload to update the log in the item of the new Array
+                    log.id === action.payload.id ? action.payload : log)
+            };
+
+
+        case SET_CURRENT:
+            return {
+                ...state,
+                current_editing_log: action.payload // use a log data to assign value to "current" property in store
+            };
+
+        case CLEAR_CURRENT:
+            return {
+                ...state,
+                current_editing_log: null
             };
 
 

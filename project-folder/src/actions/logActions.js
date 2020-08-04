@@ -143,13 +143,13 @@ export const actionDeleteLogWithId = id => async dispatch => {
 };
 
 // Update log on server
-export const updateLog = log => async dispatch => {
+export const actionUpdateLog = updatedLog => async dispatch => {
   try {
     setLoading();
 
-    const res = await fetch(`/logs/${log.id}`, {
+    const res = await fetch(`http://localhost:5000/logs/${updatedLog.id}`, {
       method: 'PUT',
-      body: JSON.stringify(log),
+      body: JSON.stringify(updatedLog),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -170,11 +170,11 @@ export const updateLog = log => async dispatch => {
 };
 
 // Search server logs
-export const searchLogs = text => async dispatch => {
+export const actionSearchLogs = text => async dispatch => {
   try {
     setLoading();
 
-    const res = await fetch(`/logs?q=${text}`);
+    const res = await fetch(`http://localhost:5000/logs?q=${text}`);
     const data = await res.json();
 
     dispatch({
@@ -189,11 +189,11 @@ export const searchLogs = text => async dispatch => {
   }
 };
 
-// Set current log
-export const setCurrent = log => {
+// Use current log and add a "current" property to the log
+export const actionSetCurrent = log_item_for_editing => {
   return {
     type: SET_CURRENT,
-    payload: log
+    payload: log_item_for_editing
   };
 };
 
