@@ -2,13 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment'; // generate formatted time stamp
 
+import M from 'materialize-css/dist/js/materialize.min.js';
+
+import { connect } from 'react-redux';
+import { actionDeleteLogWithId } from '../../actions/logActions';
+
+
 // emmet rafcp
 
 // The component for displaying li element inside ul in Logs.js
 const logItem = (
-  { prop_log }  // receive log data object from API via props from parent Component Logs.js
+  { prop_log, // prop for log data in <logItem /> in Logs.js
+    actionDeleteLogWithId }  // calls action and DELETE dispatch
 ) => {
 
+  // === CSS styles in JSX ===
   const style_log_container = {
     'padding': '10x 0px 10px 0px',
   };
@@ -18,6 +26,18 @@ const logItem = (
     // 'marginTop': '25x', // can't apply
     'lineHeight': '2.5rem',
   };
+
+  // === DELETE data from DB with action & its dispatch function ===
+  const clickAndDeleteLog = () => {
+
+    actionDeleteLogWithId(prop_log.id); // use current log's id to call the action & dispatch for reducer case "DELETE_LOG"
+
+    M.toast(
+      { html: 'Log deleted' }
+    ); //ref: https://materializecss.com/toasts.html
+
+  };
+
 
   return (
 
@@ -65,10 +85,9 @@ const logItem = (
 
 
 
-        {/* Button */}
-        <a href="#!" className="secondary-content">
-          <i className="material-icons grey-text"> delete </i>
-        </a>
+        {/* === TRASH CAN Button for DELETING data ===*/}
+        <a href="#!" className="secondary-content" onClick={clickAndDeleteLog}>
+          <i className="material-icons grey-text"> delete </i> </a>
 
 
       </div>
@@ -84,6 +103,18 @@ const logItem = (
 
 logItem.propTypes = {
   prop_log: PropTypes.object.isRequired,
+  actionDeleteLogWithId: PropTypes.func.isRequired,
 };
 
-export default logItem;
+
+// original way of export Component:  export default logItem;
+
+// Now export Component with "connect" function
+// (mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)
+
+export default connect(
+  null, // use state inside Logs Component as "prop"
+  { actionDeleteLogWithId }// use action/dispatch inside Logs Component as "prop"
+)(logItem); // connect this Logs Component with Redux store before export default
+
+

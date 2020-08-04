@@ -3,6 +3,7 @@ import {
     SET_LOADING,
     LOGS_ERROR,
     ADD_NEW_LOG,
+    DELETE_LOG,
 } from '../actions/types';
 
 const initialState = {
@@ -55,10 +56,27 @@ export default (
                 loading: false,
             };
 
+        case DELETE_LOG:
+            console.log(`\nReady to delete one log with reducer now ...\n`);
+            return {
+                ...state,
+                logs: state.logs.filter( //use filtered "logs" items as new logs obj to update the "logs" object in state
+                    log => log.id !== action.payload // action.payload passed into reducer is the value of "id"!! 
+                    //filter and keep the logs have the id NOT eqaul to the action.id
+                ),
+                loading: false,
+            };
+
+
         default:
             return state;
     }
 };
+
+
+
+
+
 
 /*
 Note:

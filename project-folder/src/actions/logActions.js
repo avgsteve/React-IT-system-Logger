@@ -112,24 +112,33 @@ export const actionAddNewLog = new_log_data => async dispatch => {
 };
 
 
-// Delete log from server
-export const deleteLog = id => async dispatch => {
+// Delete log from server (and use argument id as payload)
+export const actionDeleteLogWithId = id => async dispatch => {
+
   try {
     setLoading();
 
-    await fetch(`/logs/${id}`, {
-      method: 'DELETE'
-    });
+    console.log('\nAction of "actionDeleteLogWithId" has started!\n');
+
+    await fetch(`http://localhost:5000/logs/${id}`
+      , { method: 'DELETE' }
+    );
+
 
     dispatch({
       type: DELETE_LOG,
       payload: id
     });
+
+    console.log(`Data with the id: ${id} has been deleted!`);
+
   } catch (err) {
+
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err
     });
+
   }
 };
 
