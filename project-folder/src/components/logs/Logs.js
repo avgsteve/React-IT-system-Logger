@@ -26,17 +26,18 @@ const Logs = (
     getLogs // the prop "action" function & "dispatch"
   }) => {
 
-  console.log('\nThe props of "logs" & "loading" in Component "Log.js": \n', logs, loading);
-
-
   // Call "getLogs" action and send dispatch to store to set & read new data from server
   useEffect(
     () => {
+
+      console.log('\n=== "useEffect" in Logs.js initiated ===\n\n');
+
       getLogs();
 
-    }, []); // eslint-disable-next-line
+      // eslint-disable-next-line
+    }, []);
 
-
+  console.log('\nThe props of "logs" & "loading" in Component "Log.js": \n', logs, loading);
 
   // ==== MAIN FUNCTIONALITY ==== //
 
@@ -92,6 +93,7 @@ const Logs = (
 
 Logs.propTypes = {
   log: PropTypes.object.isRequired,
+  getLogs: PropTypes.func.isRequired,
 };
 
 

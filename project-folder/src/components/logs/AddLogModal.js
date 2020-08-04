@@ -2,10 +2,19 @@ import React,
 {
   useState
 } from 'react';
+// --- connect this Component with Redux store & action function  ---
+import { connect } from 'react-redux';
+import { actionAddNewLog } from '../../actions/logActions';
+
+import PropTypes from 'prop-types';
+
 
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const AddLogModal = () => {
+
+
+// need to pass argument "actionAddNewLog" because of "connect" function
+const AddLogModal = ({ actionAddNewLog }) => {
 
   //
   const [message, setMessage] = useState('');
@@ -14,7 +23,7 @@ const AddLogModal = () => {
 
 
   //function for submit action: <a href="#!" onClick={onSubmit}
-  const onSubmit = (submitEvent) => {
+  const onSubmit = (submit_Event) => {
 
     // submitEvent.preventDefault();
 
@@ -26,19 +35,32 @@ const AddLogModal = () => {
       ); //ref: https://materializecss.com/toasts.html
 
     } else {
-      console.log("\nmessage: ", message, "\nattention: ", attention, "\ntechnician: ", technician);
 
-      // after submitting the form, resetting form data
+      const new_log_data = {
+        message: message,
+        attention: attention,
+        tech: technician,
+        date: new Date(),
+      };
+
+      actionAddNewLog(new_log_data);
+
+      // console.log("\nmessage: ", message, "\nattention: ", attention, "\ntechnician: ", technician);
+
+      // after submitting the form, clearing data in input field 
       setMessage("");
       setTechnician("");
       setAttention(false);
-      // close the modal
-      let formModal = document.getElementById("add-log-modal");
-      let instance = M.Modal.getInstance(formModal);
-      instance.close();
+
+      M.toast({ html: `Log added by ${technician}` });
+
+      // setTimeout(() => {     // close the modal
+      //   let formModal = document.getElementById("add-log-modal");
+      //   let instance = M.Modal.getInstance(formModal);
+      //   instance.close();
+      // }, 1000);
 
     }
-
   };
 
   // inline CSS for div element id='add-log-modal 
@@ -131,5 +153,23 @@ const AddLogModal = () => {
 };
 
 
+AddLogModal.propTypes = {
+  actionAddNewLog: PropTypes.func.isRequired,
+};
 
-export default AddLogModal;
+
+
+// export default AddLogModal; // original way of export Component
+
+// Now export Component with "connect" function
+// (mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)
+
+export default connect(
+  null, // bring NO state from current store to AddLogModal Component as "prop" because only want to call the function actionAddNewLog for the main purpose of only adding new data
+
+  { actionAddNewLog }// use action/dispatch inside Logs Component as "prop"
+)(AddLogModal); // connect this Logs Component with Redux store before export default
+
+
+
+// ref: https://react-redux.js.org/api/connect#connect-parameters

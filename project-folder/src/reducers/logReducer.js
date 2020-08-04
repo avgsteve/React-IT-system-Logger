@@ -2,6 +2,7 @@ import {
     GET_LOGS,
     SET_LOADING,
     LOGS_ERROR,
+    ADD_NEW_LOG,
 } from '../actions/types';
 
 const initialState = {
@@ -41,6 +42,17 @@ export default (
             return {
                 ...state,
                 error: action.payload
+            };
+
+        case ADD_NEW_LOG:
+            console.log(`\nAdd & Update the state with reducer now ...\n`);
+            return {
+                ...state,
+                logs: [ // return the NEW logs object data make of:
+                    ...state.logs, // original logs data
+                    action.payload // & appended log data
+                ],
+                loading: false,
             };
 
         default:

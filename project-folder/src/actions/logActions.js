@@ -2,7 +2,7 @@ import {
   GET_LOGS,
   SET_LOADING,
   LOGS_ERROR,
-  ADD_LOG,
+  ADD_NEW_LOG,
   DELETE_LOG,
   UPDATE_LOG,
   SEARCH_LOGS,
@@ -50,7 +50,7 @@ export const getLogs = () => async dispatch => {
     const res = await fetch('http://localhost:5000/logs');
     const data = await res.json();
 
-    console.log('data from getLogs in logActions.js :', data);
+    // console.log('data from getLogs in logActions.js :', data);
 
     dispatch({
       type: GET_LOGS,
@@ -68,31 +68,49 @@ export const getLogs = () => async dispatch => {
 };
 
 
-// Add new log
-export const addLog = log => async dispatch => {
+// Add new log with passed-in log data 
+export const actionAddNewLog = new_log_data => async dispatch => {
+
   try {
+
+    console.log(`actionAddNewLog initiated ...`);
+
     setLoading();
 
-    const res = await fetch('/logs', {
+    const res = await fetch('http://localhost:5000/logs', {
       method: 'POST',
-      body: JSON.stringify(log),
+      body: JSON.stringify(new_log_data),
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    const data = await res.json();
+
+    const updated_log_data_from_server = await res.json();
+
+    console.log(`\nsending dispatch to Reducer ...`);
 
     dispatch({
-      type: ADD_LOG,
-      payload: data
+      type: ADD_NEW_LOG, // will send dispatch data to reducer
+      payload: updated_log_data_from_server, // and update the state with updated data from server
+
+      // payload: {
+      //   data: updated_log_data,
+      //   server_response: res
+      // }),
     });
+
   } catch (err) {
+
+    console.log('  \nThere\'s an error while adding new data with actionAddNewLog in logActions.js.  Error log:\n  ', err);
+
     dispatch({
       type: LOGS_ERROR,
       payload: err.response.statusText
     });
+
   }
 };
+
 
 // Delete log from server
 export const deleteLog = id => async dispatch => {

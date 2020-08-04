@@ -83,7 +83,7 @@ const logItem = (
 //
 
 logItem.propTypes = {
-  log_data_from_Logs_prop: PropTypes.object.isRequired,
+  prop_log: PropTypes.object.isRequired,
 };
 
 export default logItem;
