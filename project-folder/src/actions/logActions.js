@@ -38,14 +38,19 @@ export const setLoading = () => {
 
 
 // Get logs from server (by returning dispatch function)
+// And set new data to state with dispatch
 export const getLogs = () => async dispatch => {
 
   try {
 
+    console.log('\nAction of "getLogs" has started!\n');
+
     setLoading();
 
-    const res = await fetch('/logs');
+    const res = await fetch('http://localhost:5000/logs');
     const data = await res.json();
+
+    console.log('data from getLogs in logActions.js :', data);
 
     dispatch({
       type: GET_LOGS,
@@ -56,7 +61,7 @@ export const getLogs = () => async dispatch => {
 
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText
+      payload: err
     });
 
   }

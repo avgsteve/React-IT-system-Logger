@@ -9,17 +9,23 @@ const initialState = {
     currrent: null,
     loading: false,
     error: null,
+    attention: false,
+    testLog: "test",
 };
 
 
-export default (state = initialState, action) => {
+export default (
+    state = initialState, //讓 state 的預設數值是 上面的 initialState
+    action) => {
 
     switch (action.type) {
 
-        case GET_LOGS:
+        case GET_LOGS: // Get data from server
             return {
-                ...state, // return current fetched data
-                loading: false // set loading back to true
+                ...state, // then return current fetched data
+                loading: false, // finally, set loading back to true
+                // testLog: "in GET_LOGS"
+                logs: action.payload
             };
 
         case SET_LOADING:
@@ -36,7 +42,6 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.payload
             };
-
 
         default:
             return state;

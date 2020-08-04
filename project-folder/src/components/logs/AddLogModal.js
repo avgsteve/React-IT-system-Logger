@@ -57,7 +57,7 @@ const AddLogModal = () => {
       {/* === Main content in Modal === */}
 
       <div className="modal-content">
-        <h4>Enter System Log</h4>
+        <h4>Enter New System Log</h4>
 
 
         {/* --- first ROW: Input Log message --- */}

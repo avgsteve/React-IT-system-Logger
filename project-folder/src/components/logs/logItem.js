@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'react-moment';
+import Moment from 'react-moment'; // generate formatted time stamp
 
 // emmet rafcp
 
 // The component for displaying li element inside ul in Logs.js
 const logItem = (
-
-  { prop_log }  //receive log object from API via props
-
+  { prop_log }  // receive log data object from API via props from parent Component Logs.js
 ) => {
-
-  // ref for modal and trigger in <a> inside <li>:
-  // https://materializecss.com/modals.html#!
-
 
   const style_log_container = {
     'padding': '10x 0px 10px 0px',
@@ -25,7 +19,6 @@ const logItem = (
     'lineHeight': '2.5rem',
   };
 
-
   return (
 
     <li className="collection-item" style={style_log_container}>
@@ -35,16 +28,17 @@ const logItem = (
         {/* === First line of log: Title === */}
 
         <a href="#edit-log-modal" style={style_log_title}
-          className={` modal-trigger           
+          className={`modal-trigger           
           ${ prop_log.attention ? 'red-text' : 'blue-text'} `}
+        > {prop_log.message} </a>
 
-        >
+        {/* ref for "modal" and using class name "modal trigger" 
+         in <a> inside <li>: https://materializecss.com/modals.html#! */}
 
-          {prop_log.message} </a>
 
+        <br />
 
         {/* === Second line of log: Log Id, technician and log date & time === */}
-        <br />
 
         {/* in-inline text for Log DETAILS composited of span tags */}
         <span className="grey-text">
@@ -62,6 +56,8 @@ const logItem = (
 
           <Moment format='MMMM Do YYYY, h:mm:ss a'>
             {prop_log.data}
+            {/* ref for time format with Moment: 
+            https://momentjs.com/docs/#/parsing/string-format/ */}
           </Moment>
 
 
@@ -87,7 +83,7 @@ const logItem = (
 //
 
 logItem.propTypes = {
-  prop_log: PropTypes.object.isRequired,
+  log_data_from_Logs_prop: PropTypes.object.isRequired,
 };
 
 export default logItem;
