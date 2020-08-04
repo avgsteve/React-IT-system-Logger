@@ -2,21 +2,25 @@ import React, {
   Fragment,
   useEffect
 } from 'react';
+
 // ===== Files for using Materialize CSS
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import './App.css';
-// ===== Components
+
+// ===== Redux and Store
+import { Provider } from 'react-redux';
+import centralizedStore from './store';
+
+// ===== Components in App.js
 import SearchBar from './components/layout/SearchBar';
-import Logs from './components/logs/Logs';  // List system logs
-import AddBtn from './components/layout/AddBtn'; // round btn for activing Modal
+import Logs from './components/logs/Logs';  // For Listing system logs
+import AddBtn from './components/layout/AddBtn'; // round btn for triggering Modal
+
+// === Modals for displaying data on page ===
 import AddLogModal from './components/logs/AddLogModal';
 import EditLogModal from './components/logs/EditLogModal';
 import AddTechnicianModal from './components/techs/AddTechnicianModal';
 import TechniciansListModal from './components/techs/TechnicianListModal';
-// ===== Redux
-import { Provider } from 'react-redux';
-import store from './store';
 
 function App() {
 
@@ -30,8 +34,9 @@ function App() {
   );
 
 
+  // use "centralizedStore" create with one single "combined" Reducer file
   return (
-    <Provider store={store}>
+    <Provider store={centralizedStore}>
 
       <Fragment>
 
