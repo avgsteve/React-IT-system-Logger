@@ -37,27 +37,19 @@ function App() {
   // use "centralizedStore" create with one single "combined" Reducer file
   return (
     <Provider store={centralizedStore}>
-
       <Fragment>
-
         <SearchBar />
-
         <div className="container">
           <AddBtn />
           <AddLogModal />
+          <EditLogModal />
           <AddTechnicianModal />
           <TechniciansListModal />
-
-
-          <EditLogModal />
           <Logs />
         </div>
-
       </Fragment>
-
     </Provider>
   );
-
 };
 
 export default App;

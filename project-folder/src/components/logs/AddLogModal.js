@@ -107,7 +107,8 @@ const AddLogModal = ({ actionAddNewLog }) => {
               // Use className='browser-default' to pre-select default technician if available
               onChange={e => setTechnician(e.target.value)}
             // Use onChange to dynamically get input value and save it in state setter : setMessage
-            ><option value='' disabled> == Select technician == </option>
+            >
+              <option value='' disabled> == Select technician == </option>
               <TechnicianSelectOptions />
             </select>
 

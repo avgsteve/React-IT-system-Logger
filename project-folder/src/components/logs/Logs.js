@@ -6,7 +6,7 @@ import React,
 
 // === Redux modules ===
 import {
-  connect, // connect this component (with export keyword) to Redux store
+  connect // connect this component (with export keyword) to Redux store
 } from 'react-redux';
 
 // === Other modules ===
@@ -15,7 +15,7 @@ import { getLogs } from '../../actions/logActions'; // returns a async dispatch 
 
 
 // === Component ===
-import LogItem from './LogItem'; // wrong path name fixed
+import LogItem from './logItem'; // wrong path name fixed
 import PreloaderProgressBar from '../layout/Preloader_progressBar';
 
 // ==== MAIN FUNCTION: GET logs data from Redux store by connect module ====

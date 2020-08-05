@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { searchLogs } from '../../actions/logActions';
+import { action_searchLogs } from '../../actions/logActions';
 
-const SearchBar = ({ searchLogs }) => {
+const SearchBar = ({ action_searchLogs }) => {
   const text = useRef('');
 
   const onChange = e => {
-    searchLogs(text.current.value);
+    action_searchLogs(text.current.value);
   };
 
   return (
@@ -34,10 +34,10 @@ const SearchBar = ({ searchLogs }) => {
 };
 
 SearchBar.propTypes = {
-  searchLogs: PropTypes.func.isRequired
+  action_searchLogs: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { searchLogs }
+  { action_searchLogs }
 )(SearchBar);

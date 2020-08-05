@@ -6,12 +6,12 @@ import {
   TECHS_ERROR
 } from './types';
 
-// Get techs from server
-export const getTechs = () => async dispatch => {
+// Get technicians from server
+export const action_getTechnicians = () => async dispatch => {
   try {
-    setLoading();
+    action_setLoading();
 
-    const res = await fetch('/techs');
+    const res = await fetch('/technicians');
     const data = await res.json();
 
     dispatch({
@@ -27,11 +27,11 @@ export const getTechs = () => async dispatch => {
 };
 
 // Add technician to server
-export const addTech = tech => async dispatch => {
+export const action_addTechnician = tech => async dispatch => {
   try {
-    setLoading();
+    action_setLoading();
 
-    const res = await fetch('/techs', {
+    const res = await fetch('/technicians', {
       method: 'POST',
       body: JSON.stringify(tech),
       headers: {
@@ -52,11 +52,11 @@ export const addTech = tech => async dispatch => {
   }
 };
 
-export const deleteTech = id => async dispatch => {
+export const action_deleteTechnician = id => async dispatch => {
   try {
-    setLoading();
+    action_setLoading();
 
-    await fetch(`/techs/${id}`, {
+    await fetch(`/technicians/${id}`, {
       method: 'DELETE'
     });
 
@@ -73,7 +73,7 @@ export const deleteTech = id => async dispatch => {
 };
 
 // Set loading to true
-export const setLoading = () => {
+export const action_setLoading = () => {
   return {
     type: SET_LOADING
   };

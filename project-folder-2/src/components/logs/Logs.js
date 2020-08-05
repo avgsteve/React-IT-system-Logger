@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';
 import PropTypes from 'prop-types';
-import { getLogs } from '../../actions/logActions';
+import { action_getLogs } from '../../actions/logActions';
 
-const Logs = ({ log: { logs, loading }, getLogs }) => {
+const Logs = ({ log: { logs, loading }, action_getLogs }) => {
   useEffect(() => {
-    getLogs();
+    action_getLogs();
     // eslint-disable-next-line
   }, []);
 
@@ -23,15 +23,15 @@ const Logs = ({ log: { logs, loading }, getLogs }) => {
       {!loading && logs.length === 0 ? (
         <p className='center'>No logs to show...</p>
       ) : (
-        logs.map(log => <LogItem log={log} key={log.id} />)
-      )}
+          logs.map(log => <LogItem log={log} key={log.id} />)
+        )}
     </ul>
   );
 };
 
 Logs.propTypes = {
   log: PropTypes.object.isRequired,
-  getLogs: PropTypes.func.isRequired
+  action_getLogs: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -40,5 +40,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLogs }
+  { action_getLogs }
 )(Logs);

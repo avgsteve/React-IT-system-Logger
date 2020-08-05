@@ -46,6 +46,7 @@ const AddTechnicianModal = () => {
         height: '75%'
     };
 
+    // <div id='add-technician-modal' className="modal" style={modalStyle} >
 
 
     return (
