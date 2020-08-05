@@ -1,102 +1,80 @@
-import React,
-{
-    useState
-} from 'react';
-
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { action_addTechnician } from '../../actions/technicianActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const AddTechnicianModal = () => {
+const AddTechnicianModal = ({ action_addTechnician }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-    // state for global data (within this component)
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+  const onSubmit = () => {
+    if (firstName === '' || lastName === '') {
+      M.toast({ html: 'Please enter the first and last name' });
+    } else {
+      action_addTechnician({
+        firstName,
+        lastName
+      });
 
+      M.toast({ html: `${firstName} ${lastName} was added as a tech` });
 
-    // MAIN function for submit action: <a href="#!" onClick={onSubmit}
-    const onSubmit = (submitEvent) => {
+      // Clear Fields
+      setFirstName('');
+      setLastName('');
+    }
+  };
 
-        submitEvent.preventDefault();
-
-        // Check if all the required first and last name are entered
-        if (firstName === '' || lastName === '') {
-            // if not entered correctly, display error message
-            M.toast(
-                { html: 'Please make sure you have entered both first and last name' }
-            ); //ref: https://materializecss.com/toasts.html
-
-        } else {
-            console.log("\nfirstName: ", firstName, "\nlastName: ", lastName);
-
-            // after submitting the form, resetting form data
-            setFirstName("");
-            setLastName("");
-
-            // close the modal
-            let formModal = document.getElementById("add-log-modal");
-            let instance = M.Modal.getInstance(formModal);
-            instance.close();
-
-        }
-
-    };
-
-    // inline CSS for div element id='add-log-modal 
-    const modalStyle = {
-        width: '75%',
-        height: '75%'
-    };
-
-    // <div id='add-technician-modal' className="modal" style={modalStyle} >
-
-
-    return (
-        <div id='add-technician-modal' className="modal" style={modalStyle} >
-            {/* // The prop id='add-log-modal' must match the element in AddBtn.js:    <a href="#add-log-modal"   */}
-
-            {/* === Main content in Modal === */}
-
-            <div className="modal-content">
-                <h4>New Technician</h4>
-
-                {/* --- first ROW: Input First Name --- */}
-                <div className="row">
-                    <div className="input-field">
-                        <input type="text" name='firstName' value={firstName}
-                            onChange={event => setFirstName(event.target.value)}
-                        />
-
-                        <label htmlFor="firstName" className='active'>
-                            First Name </label>
-                    </div>
-                </div>
-
-                {/* --- Second ROW: Input Last Name --- */}
-                <div className="row">
-                    <div className="input-field">
-                        <input type="text" name='lastName' value={lastName}
-                            onChange={event => setLastName(event.target.value)}
-                        // Use onChange to dynamically get input value and save it in state setter : setMessage
-                        />
-
-                        <label htmlFor="lastName" className='active'>
-                            Last Name </label>
-                    </div>
-                </div>
-
-
-
-            </div> {/* end of <  div className="modal-content"> */}
-
-            <div className="modal-footer">
-                <a href="#!" onClick={onSubmit} className="modal-close waves-effect waves-blue blue btn"> Enter </a>
-            </div>
-
-            {/* end of outermost div */}
+  return (
+    <div id='add-technician-modal' className='modal'>
+      <div className='modal-content'>
+        <h4>New Technician</h4>
+        <div className='row'>
+          <div className='input-field'>
+            <input
+              type='text'
+              name='firstName'
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+            />
+            <label htmlFor='firstName' className='active'>
+              First Name
+            </label>
+          </div>
         </div>
 
-    ); // end of return block
-
+        <div className='row'>
+          <div className='input-field'>
+            <input
+              type='text'
+              name='lastName'
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+            />
+            <label htmlFor='lastName' className='active'>
+              Last Name
+            </label>
+          </div>
+        </div>
+      </div>
+      <div className='modal-footer'>
+        <a
+          href='#!'
+          onClick={onSubmit}
+          className='modal-close waves-effect blue waves-light btn'
+        >
+          Enter
+        </a>
+      </div>
+    </div>
+  );
 };
 
+AddTechnicianModal.propTypes = {
+  action_addTechnician: PropTypes.func.isRequired
+};
 
-export default AddTechnicianModal;
+export default connect(
+  null,
+  { action_addTechnician }
+)(AddTechnicianModal);

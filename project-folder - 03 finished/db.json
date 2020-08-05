@@ -1,0 +1,68 @@
+{
+  "logs": [
+    {
+      "message": "Changed network card in server 007",
+      "attention": false,
+      "tech": "Sam Smith",
+      "date": "2019-05-31T15:46:10.179Z",
+      "id": 1
+    },
+    {
+      "message": "1122 wireless down",
+      "attention": true,
+      "tech": "Sara Wilson",
+      "date": "2019-05-31T15:46:48.690Z",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "message": "test log",
+      "attention": false,
+      "tech": "Steve Leng",
+      "data": "2020-08-04T09:10:45.607Z"
+    },
+    {
+      "id": 5,
+      "message": "test test test test test ",
+      "attention": false,
+      "tech": "Steve Leng",
+      "data": "2020-08-04T09:06:52.684Z"
+    },
+    {
+      "message": "Server log test",
+      "attention": true,
+      "tech": "Sara Wilson",
+      "date": "2020-08-04T10:18:31.711Z",
+      "id": 6
+    },
+    {
+      "message": "test log abc",
+      "attention": true,
+      "tech": "Steve Leng",
+      "date": "2020-08-04T13:59:32.955Z",
+      "id": 7
+    }
+  ],
+  "technicians": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    {
+      "id": 2,
+      "firstName": "Sam",
+      "lastName": "Smith"
+    },
+    {
+      "id": 3,
+      "firstName": "Sara",
+      "lastName": "Wilson"
+    },
+    {
+      "id": 4,
+      "firstName": "Steve",
+      "lastName": "Leng"
+    }
+  ]
+}

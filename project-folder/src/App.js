@@ -1,47 +1,31 @@
-import React, {
-  Fragment,
-  useEffect
-} from 'react';
-
-// ===== Files for using Materialize CSS
-import 'materialize-css/dist/css/materialize.min.css';
-import M from 'materialize-css/dist/js/materialize.min.js';
-
-// ===== Redux and Store
-import { Provider } from 'react-redux';
-import centralizedStore from './store';
-
-// ===== Components in App.js
+import React, { Fragment, useEffect } from 'react';
 import SearchBar from './components/layout/SearchBar';
-import Logs from './components/logs/Logs';  // For Listing system logs
-import AddBtn from './components/layout/AddBtn'; // round btn for triggering Modal
-
-// === Modals for displaying data on page ===
+import Logs from './components/logs/Logs';
+import AddBtn from './components/layout/AddBtn';
 import AddLogModal from './components/logs/AddLogModal';
 import EditLogModal from './components/logs/EditLogModal';
 import AddTechnicianModal from './components/techs/AddTechnicianModal';
-import TechniciansListModal from './components/techs/TechnicianListModal';
+import TechniciansListModal from './components/techs/TechniciansListModal';
+import { Provider } from 'react-redux';
+import store from './store';
 
-function App() {
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import './App.css';
 
-  useEffect(
-    () => {
-      // let Materialize JavaScript to init automatically and globally
-      // ref: https://tinyurl.com/y5mvnhom
-      M.AutoInit();
-
-    }, [] // don't need to call it on every render
-  );
-
-
-  // use "centralizedStore" create with one single "combined" Reducer file
+const App = () => {
+  useEffect(() => {
+    // Init Materialize JS
+    M.AutoInit();
+  });
   return (
-    <Provider store={centralizedStore}>
+    <Provider store={store}>
       <Fragment>
         <SearchBar />
-        <div className="container">
+        <div className='container'>
           <AddBtn />
           <AddLogModal />
+
           <EditLogModal />
           <AddTechnicianModal />
           <TechniciansListModal />
