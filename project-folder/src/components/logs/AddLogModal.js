@@ -2,28 +2,29 @@ import React, { useState } from 'react';
 import TechnicianSelectOptions from '../techs/TechnicianSelectOptions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { action_getLogs } from '../../actions/logActions';
+import { action_addLog } from '../../actions/logActions';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const AddLogModal = ({ action_getLogs }) => {
+const AddLogModal = ({ action_addLog }) => {
   const [message, setMessage] = useState('');
   const [attention, setAttention] = useState(false);
-  const [tech, setTech] = useState('');
+  const [technicianName, setTech] = useState('');
 
   const onSubmit = () => {
-    if (message === '' || tech === '') {
-      M.toast({ html: 'Please enter a message and tech' });
+    if (message === '' || technicianName === '') {
+      M.toast({ html: 'Please enter a message and select a technician' });
     } else {
+
       const newLog = {
         message,
         attention,
-        tech,
+        technician: technicianName,
         date: new Date()
       };
 
-      action_getLogs(newLog);
+      action_addLog(newLog);
 
-      M.toast({ html: `Log added by ${tech}` });
+      M.toast({ html: `Log added by technician: "${technicianName}"` });
 
       // Clear Fields
       setMessage('');
@@ -53,8 +54,8 @@ const AddLogModal = ({ action_getLogs }) => {
         <div className='row'>
           <div className='input-field'>
             <select
-              name='tech'
-              value={tech}
+              name='technicianName'
+              value={technicianName}
               className='browser-default'
               onChange={e => setTech(e.target.value)}
             >
@@ -97,7 +98,7 @@ const AddLogModal = ({ action_getLogs }) => {
 };
 
 AddLogModal.propTypes = {
-  action_getLogs: PropTypes.func.isRequired
+  action_addLog: PropTypes.func.isRequired
 };
 
 const modalStyle = {
@@ -107,5 +108,5 @@ const modalStyle = {
 
 export default connect(
   null,
-  { action_getLogs }
+  { action_addLog }
 )(AddLogModal);

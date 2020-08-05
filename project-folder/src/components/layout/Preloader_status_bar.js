@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Preloader = () => {
+const Preloader_status_bar = () => {
   return (
     <div className='progress blue lighten-4'>
       <div className='indeterminate blue' />
@@ -8,4 +8,4 @@ const Preloader = () => {
   );
 };
 
-export default Preloader;
+export default Preloader_status_bar;

@@ -11,8 +11,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  logs: null,
-  current: null,
+  logs_in_array: null,
+  current_editing: null,
   loading: false,
   error: null
 };
@@ -22,42 +22,42 @@ export default (state = initialState, action) => {
     case GET_LOGS:
       return {
         ...state,
-        logs: action.payload,
+        logs_in_array: action.payload,
         loading: false
       };
     case ADD_LOG:
       return {
         ...state,
-        logs: [...state.logs, action.payload],
+        logs_in_array: [...state.logs_in_array, action.payload], // append payload (newly added log) to current Array of logs_in_array data
         loading: false
       };
     case DELETE_LOG:
       return {
         ...state,
-        logs: state.logs.filter(log => log.id !== action.payload),
+        logs_in_array: state.logs_in_array.filter(log => log.id !== action.payload),
         loading: false
       };
     case UPDATE_LOG:
       return {
         ...state,
-        logs: state.logs.map(log =>
+        logs_in_array: state.logs_in_array.map(log =>
           log.id === action.payload.id ? action.payload : log
         )
       };
     case SEARCH_LOGS:
       return {
         ...state,
-        logs: action.payload
+        logs_in_array: action.payload
       };
     case SET_CURRENT:
       return {
         ...state,
-        current: action.payload
+        current_editing: action.payload
       };
     case CLEAR_CURRENT:
       return {
         ...state,
-        current: null
+        current_editing: null
       };
     case SET_LOADING:
       return {

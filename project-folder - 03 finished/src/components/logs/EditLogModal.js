@@ -1,7 +1,8 @@
 import React,
 {
   useState,
-  useEffect
+  useEffect,
+  useRef
 } from 'react';
 
 import { connect } from 'react-redux';
@@ -16,15 +17,18 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const EditLogModal = ({ current_Log, actionUpdateLog }) => {
 
+  const input_field_message = useRef(null);
+
   // (after clicking the <a> in title) Fill out the input field by using functions from setState 
   useEffect(() => { // use "current_Log" from props to 
     if (current_Log) {
-
+      input_field_message.current.focus();
       setMessage(current_Log.message);
       setAttention(current_Log.attention);
       setTechnician(current_Log.tech);
     }
   }, [current_Log]);
+
 
 
   // Change the value in the variables which are going to be used to update the current_Log data when submitting the form, 
@@ -52,7 +56,7 @@ const EditLogModal = ({ current_Log, actionUpdateLog }) => {
         id: current_Log.id, // use the same id as original log
         message: input_message,
         attention: input_attention,
-        tech: input_technician,
+        technician: input_technician,
         data: new Date(),
       };
 
@@ -89,7 +93,7 @@ const EditLogModal = ({ current_Log, actionUpdateLog }) => {
         {/* --- first ROW: Input Log message --- */}
         <div className="row">
           <div className="input-field">
-            <input type="text" name='message' value={input_message}
+            <input type="text" name='message' value={input_message} ref='input_field_message'
               onChange={event => setMessage(event.target.value)}
             // Use onChange to dynamically get input value and save it in state setter : setMessage
             />

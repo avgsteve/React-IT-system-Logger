@@ -17,7 +17,7 @@ const AddTechnicianModal = ({ action_addTechnician }) => {
         lastName
       });
 
-      M.toast({ html: `${firstName} ${lastName} was added as a tech` });
+      M.toast({ html: `New technician: ${firstName} ${lastName} was added` });
 
       // Clear Fields
       setFirstName('');
@@ -28,7 +28,7 @@ const AddTechnicianModal = ({ action_addTechnician }) => {
   return (
     <div id='add-technician-modal' className='modal'>
       <div className='modal-content'>
-        <h4>New Technician</h4>
+        <h4>Add New Technician</h4>
         <div className='row'>
           <div className='input-field'>
             <input

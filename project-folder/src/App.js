@@ -23,12 +23,15 @@ const App = () => {
       <Fragment>
         <SearchBar />
         <div className='container'>
-          <AddBtn />
-          <AddLogModal />
 
+          <AddBtn /> {/* blue round button on bottom right corner */}
+
+          <AddLogModal />
           <EditLogModal />
+
           <AddTechnicianModal />
           <TechniciansListModal />
+
           <Logs />
         </div>
       </Fragment>

@@ -10,19 +10,16 @@ import {
   CLEAR_CURRENT
 } from './types';
 
-// export const getLogs = () => {
-//   return async dispatch => {
-//     setLoading();
-
-//     const res = await fetch('/logs');
-//     const data = await res.json();
-
-//     dispatch({
-//       type: GET_LOGS,
-//       payload: data
-//     });
-//   };
-// };
+// (Action function as Utility) 
+// Set loading to true which represents current loading state
+export const action_setLoading = () => {
+  // set properties in store:
+  // ...state,
+  // loading: true;
+  return {
+    type: SET_LOADING
+  };
+};
 
 // Get logs from server
 export const action_getLogs = () => async dispatch => {
@@ -45,23 +42,26 @@ export const action_getLogs = () => async dispatch => {
 };
 
 // Add new log
-export const action_addLog = log => async dispatch => {
+export const action_addLog = new_log => async dispatch => {
   try {
     action_setLoading();
 
     const res = await fetch('/logs', {
       method: 'POST',
-      body: JSON.stringify(log),
+      body: JSON.stringify(new_log),
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    const data = await res.json();
+    const newly_added_data = await res.json();
+
+    console.log("New log data has been added:", newly_added_data);
 
     dispatch({
       type: ADD_LOG,
-      payload: data
+      payload: newly_added_data, // use new log data to update current store
     });
+
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
@@ -138,8 +138,11 @@ export const action_searchLogs = text => async dispatch => {
   }
 };
 
-// Set current log
-export const action_setCurrent = log => {
+// Set current log as currently being edited
+export const action_setAsCurrentEditing = log => {
+
+  console.log(`Current log id:${log.id} has been set as "current editing" in Redux store`);
+
   return {
     type: SET_CURRENT,
     payload: log
@@ -153,9 +156,4 @@ export const action_clearCurrent = () => {
   };
 };
 
-// Set loading to true
-export const action_setLoading = () => {
-  return {
-    type: SET_LOADING
-  };
-};
+

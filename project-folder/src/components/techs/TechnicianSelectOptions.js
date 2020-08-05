@@ -26,7 +26,7 @@ TechnicianSelectOptions.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  techniciansData: state.technicians
+  techniciansData: state.technicians_data_in_store
 });
 
 export default connect(
